@@ -5,6 +5,13 @@ embedded Linux 5.11.2 _musl  image 1Gb
 https://drive.google.com/file/d/1rkPBEJO3HvRNGV7Uk8CtFkjeCn8e_nNz/view?usp=sharing
 Support Can-module MCP2515 (can-utils), Alsa ,i2c .....  
 
+make sure you write to the card and not the hard drive ... !!
+The letter instead of the X is very important
+
+sudo dd if=sdcard.img of=/dev/sdX bs=1M ; sync;
+sdX (sd_card)
+
+----------------------
 ssh root@192.168.0.46
 
 login     : root
