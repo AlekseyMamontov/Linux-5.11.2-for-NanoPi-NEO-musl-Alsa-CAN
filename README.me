@@ -50,11 +50,17 @@ Configured with: ../src_gcc/configure
 --enable-tls 
 --disable-libmudflap 
 --disable-libsanitizer 
---disable-gnu-indirect-function --disable-libmpx --enable-libstdcxx-time=rt --enable-deterministic-archives --enable-libstdcxx-time --enable-libquadmath 
+--disable-gnu-indirect-function 
+--disable-libmpx 
+--enable-libstdcxx-time=rt 
+--enable-deterministic-archives 
+--enable-libstdcxx-time 
+--enable-libquadmath 
 --enable-libquadmath-support 
 --disable-decimal-float 
 --build=x86_64-pc-linux-gnu 
---host=armv7l-linux-musleabihf 'CC_FOR_BUILD=cc -static --static' 'CXX_FOR_BUILD=g++ -static --static'
+--host=armv7l-linux-musleabihf 'CC_FOR_BUILD=cc -static 
+--static' 'CXX_FOR_BUILD=g++ -static --static'
 Thread model: posix
 Supported LTO compression algorithms: zlib
 gcc version 10.2.1 20210116 (GCC) 
