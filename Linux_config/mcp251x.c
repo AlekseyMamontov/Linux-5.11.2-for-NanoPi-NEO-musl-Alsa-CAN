@@ -1229,12 +1229,10 @@ static int mcp251x_open(struct net_device *net)
 
 	/*mcp251x_gpio_restore;*/
 	
-	;
-	
 	 ret = mcp251x_hw_wake(spi);
 	/*
 	 *  problem sunxi H3 
-	 * ret = mcp251x_hw_reset(spi)
+	 *  change ret = mcp251x_hw_reset(spi)
 	 *
 	 * the right decision
 	 * interrupts = <6 8 IRQ_TYPE_LEVEL_LOW>; /*  This is the correct meaning */
