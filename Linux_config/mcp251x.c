@@ -1053,42 +1053,7 @@ static void mcp251x_tx_work_handler(struct work_struct *ws)
 	mutex_unlock(&priv->mcp_lock);
 }
 
-/* old  
- * static void mcp251x_restart_work_handler(struct work_struct *ws)
-{
-	struct mcp251x_priv *priv = container_of(ws, struct mcp251x_priv,
-						 restart_work);
-	struct spi_device *spi = priv->spi;
-	struct net_device *net = priv->net;
 
-	mutex_lock(&priv->mcp_lock);
-	if (priv->after_suspend) {
-		mcp251x_hw_reset(spi);
-		mcp251x_setup(net, spi);
-		priv->force_quit = 0;
-		if (priv->after_suspend & AFTER_SUSPEND_RESTART) {
-			mcp251x_set_normal_mode(spi);
-		} else if (priv->after_suspend & AFTER_SUSPEND_UP) {
-			netif_device_attach(net);
-			mcp251x_clean(net);
-			mcp251x_set_normal_mode(spi);
-			netif_wake_queue(net);
-		} else {
-			mcp251x_hw_sleep(spi);
-		}
-		priv->after_suspend = 0;
-	}
-
-	if (priv->restart_tx) {
-		priv->restart_tx = 0;
-		mcp251x_write_reg(spi, TXBCTRL(0), 0);
-		mcp251x_clean(net);
-		netif_wake_queue(net);
-		mcp251x_error_skb(net, CAN_ERR_RESTARTED, 0);
-	}
-	mutex_unlock(&priv->mcp_lock);
-}
-*/
 
 static irqreturn_t mcp251x_can_ist(int irq, void *dev_id)
 {
@@ -1264,13 +1229,17 @@ static int mcp251x_open(struct net_device *net)
 
 	/*mcp251x_gpio_restore;*/
 	
-	ret = mcp251x_hw_reset(spi);
+	;
 	
+	 ret = mcp251x_hw_wake(spi);
 	/*
-	 * ret = mcp251x_hw_wake(spi);
-	 * problem sunxi H3 
+	 *  problem sunxi H3 
+	 * ret = mcp251x_hw_reset(spi)
+	 *
+	 * the right decision
+	 * interrupts = <6 8 IRQ_TYPE_LEVEL_LOW>; /*  This is the correct meaning */
 	 * 
-	 * */
+	 */
 	
 	if (ret)
 		goto out_free_wq;
