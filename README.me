@@ -69,3 +69,18 @@ Thread model: posix
 Supported LTO compression algorithms: zlib
 gcc version 10.2.1 20210116 (GCC) 
 
+
+CAN start
+---
+/etc/network/interfaces
+
+auto can0
+iface can0 inet manual
+    pre-up ip link set $IFACE type can bitrate 500000 restart-ms 100
+    up ip link set $IFACE up
+    down ip link set $IFACE down
+
+
+
+
+
