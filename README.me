@@ -80,6 +80,26 @@ iface can0 inet manual
     up ip link set $IFACE up
     down ip link set $IFACE down
 
+systemd
+---
+
+can-setup.service
+sudo cp can-setup.service /etc/systemd/system/
+sudo chmod 644 /etc/systemd/system/can-setup.service
+sudo systemctl daemon-reload
+---
+sudo systemctl start can-setup.service
+sudo systemctl stop can-setup.service
+---
+auto-start
+sudo systemctl enable can-setup.service
+disabled auto-start
+sudo systemctl disable can-setup.service
+
+
+
+
+
 
 
 
